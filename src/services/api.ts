@@ -23,3 +23,7 @@ export const updateTodo = async (data: Todo) => {
 export const deleteTodo = async (id: number) => {
   return await axiosInstance.delete(`todos/${id}`);
 };
+
+export const getProjects = async (page = 1) => {
+  return (await axiosInstance.get(`projects?_page=${page}&_limit=3`)).data;
+};
