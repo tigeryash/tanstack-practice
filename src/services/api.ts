@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Todo } from "../types/todo";
+import { Product } from "../types/product";
 
 const BASE_URL = "http://localhost:8080";
 const axiosInstance = axios.create({ baseURL: BASE_URL });
@@ -26,4 +27,16 @@ export const deleteTodo = async (id: number) => {
 
 export const getProjects = async (page = 1) => {
   return (await axiosInstance.get(`projects?_page=${page}&_limit=3`)).data;
+};
+
+export const getProducts = async ({ pageParam }: { pageParam: number }) => {
+  return (
+    await axiosInstance.get<Product[]>(
+      `products?_page=${pageParam + 1}&_limit=3`
+    )
+  ).data;
+};
+
+export const getProduct = async (id: number) => {
+  return (await axiosInstance.get<Product>(`projects/${id}`)).data;
 };
